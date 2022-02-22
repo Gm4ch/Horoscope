@@ -2,37 +2,16 @@ import calendar
 import datetime
 #importing the calender library
 
-myGlobal = 0
 
 #function to take a number from the user and turn it into the month name
-def num_to_month(month):
-    if month == '1':
-        month = 'january'
-    if month == '2':
-        month = 'february'  
-    if month == '3':       
-        month = 'march'
-    if month == '4':
-        month = 'april'
-    if month =='5':
-        month = 'may'
-    if month == '6':
-        month = 'june'
-    if month == '7':
-        month = 'july'
-    if month == '8':
-        month = 'august'
-    if month == '9':
-        month = 'september'
-    if month =='10':
-        month = 'october'
-    if month == '11':
-        month = 'november'
-    if month == '12':
-        month = 'december'
+def num_to_month(monthNum):
+    months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
+    monthNum = int(monthNum) - 1
+    month = (months[monthNum])
     return month #returning the month name when the function is called
 
-#Return ... TBD
+
+
 def chineseZodiacSign(sign_num):
     sign_text = ["Monkey","Rooster","Dog","Pig","Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Sheep"]
     return sign_text[sign_num]
@@ -55,7 +34,6 @@ while (invalidMonth):  #while the month is invalid the loop runs
             birthMonth = birthMonth.lstrip("0")
             int(birthMonth)
             invalidMonth = False
-            birthMonth
             num_to_month(birthMonth) #the program calls on the function to convert the number into a name
         else:
             print("Not a valid month name. check for misspelling or incorrect number format") #if neither of the arguments are true the program tells the user thier input is wrong and keeps looping.
@@ -78,7 +56,7 @@ invalidYear = True
 while (invalidYear):
     try: #telling the computer to try the following
         birthYear = input("what year were you born on? ")
-        if datetime.datetime(int(birthYear), int(birthMonth), int(birthDay)) and len(birthYear) == 4:
+        if datetime.datetime(int(birthYear), int(birthMonth), int(birthDay)) and len(birthYear) == 4: #This line breaks the program when you input a month name instead of a month number. have to change the month name back to a number
             invalidYear = False
         else:
             print("please provide a valid answer")
