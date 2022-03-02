@@ -1,20 +1,15 @@
 import calendar
 import datetime
-from enum import Enum
 #importing the calender library
 
+months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
 
 #function to take a number from the user and turn it into the month name
 def num_to_month(monthNum):
-    months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
-    monthNum = int(monthNum) - 1
-    month = (months[monthNum])
-    return month #returning the month name when the function is called
+    return months[int(monthNum)-1] #returning the month name when the function is called
 
 def month_to_num(monthName):
-    months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
-    monthNum = months.index(monthName)
-    return monthNum
+    return months.index(monthName)+1
 
 def chineseZodiacSign(sign_num): #reuturns the animal name based on the number that is inputed
     sign_text = ["Monkey","Rooster","Dog","Pig","Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Sheep"]
@@ -22,9 +17,36 @@ def chineseZodiacSign(sign_num): #reuturns the animal name based on the number t
 
 def chinese_zodiac_calc(year):
     chineseZodiacNum = int(year) % 12 #the math to turn the birthyear ito a remainder.
-    chineseZodiacNum = int(chineseZodiacNum)
-    retSign = chineseZodiacSign(chineseZodiacNum) #running the function to turn the remainder number into an animal name.
-    return retSign
+  #running the function to turn the remainder number into an animal name.
+    return chineseZodiacSign(chineseZodiacNum)
+
+def zodiac_finder(birthMonth,birthDay):
+    if (birthMonth == 3 and birthDay >= 21) or (birthMonth == 4 and birthDay <= 20):
+        zodiac = 'Aries'
+    elif (birthMonth == 4 and birthDay >= 21) or (birthMonth == 5 and birthDay <= 20):
+        zodiac = 'Taurus'
+    elif (birthMonth == 5 and birthDay >= 21) or (birthMonth == 6 and birthDay <= 20):
+        zodiac = 'Gemini'
+    elif (birthMonth == 6 and birthDay >= 21) or (birthMonth == 7 and birthDay <= 22):
+        zodiac = 'Cancer'
+    elif (birthMonth == 7 and birthDay >= 23) or (birthMonth == 8 and birthDay <= 22):
+        zodiac = 'Leo'
+    elif (birthMonth == 8 and birthDay >= 23) or (birthMonth == 9 and birthDay <= 22):
+        zodiac = 'Virgo'
+    elif (birthMonth == 9 and birthDay >= 23) or (birthMonth == 10 and birthDay <= 22):
+        zodiac = 'Libra'
+    elif (birthMonth == 10 and birthDay >= 23) or (birthMonth == 11 and birthDay <= 22):
+        zodaic = 'Scorpio'
+    elif (birthMonth == 11 and birthDay >= 23) or (birthMonth == 12 and birthDay <= 21):
+        zodaic = 'Sagittarius'
+    elif (birthMonth == 12 and birthDay >= 22) or (birthMonth == 1 and birthDay <= 19):
+        zodaic = 'Capricorn'
+    elif (birthMonth == 1 and birthDay >= 20) or (birthMonth == 2 and birthDay <= 19):
+        zodiac = 'Aquarius'
+    elif (birthMonth == 2 and birthDay >= 20) or (birthMonth == 3 and birthDay <= 20):
+        zodiac = 'Pisces'
+    return zodiac
+        
     
 invalidMonth = True 
 while (invalidMonth):  #while the month is invalid the loop runs
@@ -39,9 +61,9 @@ while (invalidMonth):  #while the month is invalid the loop runs
             int(birthMonth)
             invalidMonth = False
         else:
-            print("Not a valid month name. check for misspelling or incorrect number format") #if neither of the arguments are true the program tells the user thier input is wrong and keeps looping.
+            print("Not a valid month name. Check for misspelling or incorrect number format.") #if neither of the arguments are true the program tells the user thier input is wrong and keeps looping.
     except ValueError:
-        print("Not a valid month name. check for misspelling or incorrect number format") #if neither of the arguments are true the program tells the user thier input is wrong and keeps looping.
+        print("Not a valid month name. Check for misspelling or incorrect number format.") #if neither of the arguments are true the program tells the user thier input is wrong and keeps looping.
 
 try: 
     int(birthMonth) #if the month is a number it runs a conversion function to turn it into a word
@@ -50,9 +72,9 @@ except ValueError:
     stringMonth = birthMonth #if an error occurs the program knows that month is a string
 
 invalidDay = True
-while (invalidDay):
+while invalidDay:
     try: #telling the computer to try the following
-        birthDay = int(input("what day of " + stringMonth.capitalize() + " were you born on? "))
+        birthDay = int(input("What day of " + stringMonth.capitalize() + " were you born on? "))
         if int(birthDay) in range(1,32):
             invalidDay = False
         else:
@@ -78,3 +100,5 @@ while (invalidYear):
 #rework user input for month name rather than month number
 
 print("Your chinese zodiac sign is", chinese_zodiac_calc(birthYear))
+
+print(zodiac_finder(intMonth, birthDay))
