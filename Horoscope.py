@@ -39,17 +39,17 @@ def zodiac_finder(birthMonth,birthDay):
     elif (birthMonth == 9 and birthDay >= 23) or (birthMonth == 10 and birthDay <= 22):
         zodiac = 'Libra'
     elif (birthMonth == 10 and birthDay >= 23) or (birthMonth == 11 and birthDay <= 22):
-        zodaic = 'Scorpio'
+        zodiac = 'Scorpio'
     elif (birthMonth == 11 and birthDay >= 23) or (birthMonth == 12 and birthDay <= 21):
-        zodaic = 'Sagittarius'
+        zodiac = 'Sagittarius'
     elif (birthMonth == 12 and birthDay >= 22) or (birthMonth == 1 and birthDay <= 19):
-        zodaic = 'Capricorn'
+        zodiac = 'Capricorn'
     elif (birthMonth == 1 and birthDay >= 20) or (birthMonth == 2 and birthDay <= 19):
         zodiac = 'Aquarius'
     elif (birthMonth == 2 and birthDay >= 20) or (birthMonth == 3 and birthDay <= 20):
         zodiac = 'Pisces'
     return zodiac
-
+ 
 print("welcome to the horoscope and zodiac program!\n\n") #welcoming the user ot the program
 
 invalidMonth = True 
@@ -103,7 +103,7 @@ while (invalidYear):
 
 #rework user input for month name rather than month number
 
-zodiac_finder(intMonth, birthDay)
+zodiac = zodiac_finder(intMonth, birthDay)
 
 """WEB SCRAPING!!!!""" 
 def get_horoscope():
@@ -123,10 +123,5 @@ def get_horoscope():
 print('\n')
 print("Your chinese zodiac sign is: ", chinese_zodiac_calc(birthYear))
 print("Your official zodiac sign is: "+zodiac_finder(intMonth, birthDay))
-print("you daily horoscope is:")
+print("Your daily horoscope is:")
 print(get_horoscope())
-
-
-
-
-    
