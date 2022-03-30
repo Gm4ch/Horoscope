@@ -1,5 +1,8 @@
 import calendar
 import datetime
+from bs4 import BeautifulSoup as bs
+import requests as rq
+import re
 #importing the calender library
 
 months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
@@ -46,8 +49,9 @@ def zodiac_finder(birthMonth,birthDay):
     elif (birthMonth == 2 and birthDay >= 20) or (birthMonth == 3 and birthDay <= 20):
         zodiac = 'Pisces'
     return zodiac
-        
-    
+
+print("welcome to the horoscope and zodiac program!\n\n") #welcoming the user ot the program
+
 invalidMonth = True 
 while (invalidMonth):  #while the month is invalid the loop runs
     try:
@@ -99,6 +103,30 @@ while (invalidYear):
 
 #rework user input for month name rather than month number
 
-print("Your chinese zodiac sign is", chinese_zodiac_calc(birthYear))
+zodiac_finder(intMonth, birthDay)
 
-print(zodiac_finder(intMonth, birthDay))
+"""WEB SCRAPING!!!!""" 
+def get_horoscope():
+    
+    def remove_html_tags(text):
+        #Remove html tags from a string
+        clean = re.compile('<.*?>')
+        return re.sub(clean, '', text)
+
+    website = ("https://nypost.com/horoscopes/"+zodiac_finder(intMonth, birthDay)+"/") #setting the correct website for the daily horoscope
+    html_text = rq.get(website).text #getting the website through beautiful soup
+    soup = bs(html_text, 'lxml')
+    allDivs = soup.find_all('div', class_ = "horoscope__description") #finding the correct class in the HTML of the website
+    dailyHoroscope = allDivs[1] #selecting the 2nd class of the divs
+    return(remove_html_tags(str(dailyHoroscope))) #running the function to remove any tags
+
+print('\n')
+print("Your chinese zodiac sign is: ", chinese_zodiac_calc(birthYear))
+print("Your official zodiac sign is: "+zodiac_finder(intMonth, birthDay))
+print("you daily horoscope is:")
+print(get_horoscope())
+
+
+
+
+    
